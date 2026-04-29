@@ -1,0 +1,174 @@
+version: '3.9'
+
+# =============================================================
+# HeatShield Infrastructure — Week 1 Setup
+# Services: Kafka, Zookeeper, PostGIS, TimescaleDB, Redis,
+#           Kafka UI, pgAdmin (dev convenience)
+# Run: docker compose up -d
+# =============================================================
+
+networks:
+  heatshield-net:
+    driver: bridge
+
+volumes:
+  postgis-data:
+  timescale-data:
+  redis-data:
+  kafka-data:
+  zookeeper-data:
+  zookeeper-logs:
+
+services:
+
+  # ── Zookeeper (required by Kafka) ──────────────────────────
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    container_name: hs-zookeeper
+    restart: unless-stopped
+    networks: [heatshield-net]
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-logs:/var/lib/zookeeper/log
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Kafka Broker ────────────────────────────────────────────
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    container_name: hs-kafka
+    restart: unless-stopped
+    networks: [heatshield-net]
+    ports:
+      - "9092:9092"       # internal (service-to-service)
+      - "29092:29092"     # external (host machine / IDE)
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      # Pre-create HeatShield topics on startup
+      KAFKA_CREATE_TOPICS: >
+        heat-events:6:1,
+        risk-alerts:6:1,
+        alert-commands:3:1,
+        agent-dlq:1:1
+      KAFKA_LOG_RETENTION_HOURS: 168
+      KAFKA_LOG_SEGMENT_BYTES: 1073741824
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+
+  # ── Kafka UI (dev tool — browse topics & messages) ──────────
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: hs-kafka-ui
+    restart: unless-stopped
+    networks: [heatshield-net]
+    ports:
+      - "8090:8080"   # open http://localhost:8090 in browser
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_CLUSTERS_0_NAME: heatshield-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+
+  # ── PostGIS (spatial data — vulnerability zones, shelters) ──
+  # postgis/postgis image extends official postgres with PostGIS
+  postgis:
+    image: postgis/postgis:16-3.4
+    container_name: hs-postgis
+    restart: unless-stopped
+    networks: [heatshield-net]
+    ports:
+      - "5433:5432"   # 5433 on host to avoid conflict with local postgres
+    volumes:
+      - postgis-data:/var/lib/postgresql/data
+      - ./docker/postgis-init:/docker-entrypoint-initdb.d   # init SQL scripts
+    environment:
+      POSTGRES_DB: heatshield_spatial
+      POSTGRES_USER: heatshield
+      POSTGRES_PASSWORD: heatshield_dev_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U heatshield -d heatshield_spatial"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ── TimescaleDB (time-series heat readings) ──────────────────
+  # timescale/timescaledb-ha extends postgres with TimescaleDB
+  timescaledb:
+    image: timescale/timescaledb-ha:pg16
+    container_name: hs-timescaledb
+    restart: unless-stopped
+    networks: [heatshield-net]
+    ports:
+      - "5434:5432"   # 5434 on host
+    volumes:
+      - timescale-data:/home/postgres/pgdata/data
+      - ./docker/timescale-init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_DB: heatshield_timeseries
+      POSTGRES_USER: heatshield
+      POSTGRES_PASSWORD: heatshield_dev_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U heatshield -d heatshield_timeseries"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ── Redis (caching + alert dedup + pub/sub) ──────────────────
+  redis:
+    image: redis:7.2-alpine
+    container_name: hs-redis
+    restart: unless-stopped
+    networks: [heatshield-net]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+      - ./docker/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ── pgAdmin (dev convenience — browse both DBs) ─────────────
+  pgadmin:
+    image: dpage/pgadmin4:8.6
+    container_name: hs-pgadmin
+    restart: unless-stopped
+    networks: [heatshield-net]
+    ports:
+      - "5050:80"     # open http://localhost:5050
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@heatshield.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    depends_on:
+      postgis:
+        condition: service_healthy
+      timescaledb:
+        condition: service_healthy
