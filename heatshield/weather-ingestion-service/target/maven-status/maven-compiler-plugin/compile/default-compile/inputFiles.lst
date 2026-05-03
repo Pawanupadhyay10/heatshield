@@ -1,0 +1,8 @@
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/config/KafkaConfig.java
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/service/WeatherIngestionService.java
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/service/HeatIndexCalculator.java
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/config/WebClientConfig.java
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/kafka/HeatEventProducer.java
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/model/HeatEvent.java
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/controller/PollController.java
+/workspaces/heatshield/heatshield/weather-ingestion-service/src/main/java/com/heatshield/ingestion/WeatherIngestionApplication.java

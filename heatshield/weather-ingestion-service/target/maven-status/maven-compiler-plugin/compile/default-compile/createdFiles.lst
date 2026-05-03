@@ -1,0 +1,10 @@
+com/heatshield/ingestion/model/HeatEvent$HeatEventBuilder.class
+com/heatshield/ingestion/model/HeatEvent.class
+com/heatshield/ingestion/controller/PollController.class
+com/heatshield/ingestion/config/WebClientConfig.class
+com/heatshield/ingestion/service/WeatherIngestionService.class
+com/heatshield/ingestion/config/KafkaConfig.class
+com/heatshield/ingestion/service/HeatIndexCalculator.class
+com/heatshield/ingestion/service/WeatherIngestionService$CityRef.class
+com/heatshield/ingestion/WeatherIngestionApplication.class
+com/heatshield/ingestion/kafka/HeatEventProducer.class

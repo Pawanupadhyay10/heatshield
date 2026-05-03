@@ -1,0 +1,15 @@
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/model/HeatEvent.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/repository/HeatReadingRepository.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/repository/VulnerabilityZoneRepository.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/consumer/HeatEventConsumer.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/config/KafkaConfig.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/entity/HeatReadingId.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/controller/StatusController.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/HeatProcessingApplication.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/service/HeatProcessingService.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/entity/HeatReadingEntity.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/kafka/RiskEventProducer.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/model/RiskEvent.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/service/RedisCacheService.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/config/RedisConfig.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/entity/VulnerabilityZoneEntity.java

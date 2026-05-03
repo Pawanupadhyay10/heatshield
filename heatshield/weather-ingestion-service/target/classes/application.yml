@@ -1,0 +1,46 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: weather-ingestion-service
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+
+owm:
+  base-url: https://api.openweathermap.org
+  api-key: ${OWM_API_KEY:dummy-key}
+
+ingestion:
+  poll-interval-ms: 15000
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      owm-api:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 60s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.heatshield: DEBUG
+    org.springframework.kafka: INFO

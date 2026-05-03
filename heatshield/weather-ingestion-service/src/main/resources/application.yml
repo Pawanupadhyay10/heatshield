@@ -4,65 +4,41 @@ server:
 spring:
   application:
     name: weather-ingestion-service
-
-  # Redis — cache OWM responses
   data:
     redis:
       host: localhost
       port: 6379
-      timeout: 2000ms
-      lettuce:
-        pool:
-          max-active: 8
-          max-idle: 4
-
-  # Kafka producer config
   kafka:
     bootstrap-servers: localhost:29092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      acks: all          # wait for all replicas before confirming
+      acks: all
       retries: 3
-      properties:
-        spring.json.type.mapping: heatEvent:com.heatshield.ingestion.model.HeatEvent
-        enable.idempotence: true  # exactly-once semantics
 
-# OpenWeatherMap API
 owm:
   base-url: https://api.openweathermap.org
-  api-key: ${OWM_API_KEY:your_key_here}  # set via env var
+  api-key: ${OWM_API_KEY:dummy-key}
 
-# Polling interval (ms) — 15 minutes default
 ingestion:
-  poll-interval-ms: 900000
+  poll-interval-ms: 15000
 
-# Resilience4j — circuit breaker around OWM API
 resilience4j:
   circuitbreaker:
     instances:
       owm-api:
         sliding-window-size: 10
-        failure-rate-threshold: 50       # open after 50% failures
-        wait-duration-in-open-state: 60s # try again after 60s
-        permitted-calls-in-half-open-state: 3
-  retry:
-    instances:
-      owm-api:
-        max-attempts: 3
-        wait-duration: 2s
-        exponential-backoff-multiplier: 2
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 60s
 
-# Actuator — expose metrics for Prometheus
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus
-  metrics:
-    export:
-      prometheus:
-        enabled: true
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 logging:
   level:
