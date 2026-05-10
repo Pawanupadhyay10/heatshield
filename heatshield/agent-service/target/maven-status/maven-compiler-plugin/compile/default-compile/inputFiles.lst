@@ -1,3 +1,14 @@
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/entity/AgentRunEntity.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/service/AgentOrchestrator.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/AgentApplication.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/consumer/RiskEventConsumer.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/model/AlertCommand.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/controller/AgentController.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/config/AgentConfig.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/service/FallbackAlertService.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/agent/HeatShieldAgent.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/agent/AgentAuditLogger.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/tools/HeatShieldTools.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/model/RiskEvent.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/agent/HeatShieldAgentService.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/repository/AgentRunRepository.java
