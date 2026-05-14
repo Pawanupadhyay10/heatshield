@@ -1,1 +1,14 @@
+com/heatshield/routing/repository/CoolShelterRepository.class
+com/heatshield/routing/service/RouteExposureScorer.class
+com/heatshield/routing/config/RoutingConfig.class
+com/heatshield/routing/model/RouteResponse.class
+com/heatshield/routing/service/OsmDataLoader.class
 com/heatshield/routing/RoutingApplication.class
+com/heatshield/routing/entity/CoolShelterEntity$CoolShelterEntityBuilder.class
+com/heatshield/routing/service/RedisCacheService.class
+com/heatshield/routing/service/ShelterQueryService.class
+com/heatshield/routing/entity/CoolShelterEntity.class
+com/heatshield/routing/controller/RoutingController.class
+com/heatshield/routing/model/RouteResponse$RouteResponseBuilder.class
+com/heatshield/routing/model/ShelterResult$ShelterResultBuilder.class
+com/heatshield/routing/model/ShelterResult.class

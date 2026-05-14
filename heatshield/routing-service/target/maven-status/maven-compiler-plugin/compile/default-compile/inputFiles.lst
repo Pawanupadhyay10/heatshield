@@ -1,1 +1,11 @@
 /workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/RoutingApplication.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/service/RedisCacheService.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/repository/CoolShelterRepository.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/model/RouteResponse.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/controller/RoutingController.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/service/ShelterQueryService.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/service/RouteExposureScorer.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/service/OsmDataLoader.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/config/RoutingConfig.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/entity/CoolShelterEntity.java
+/workspaces/heatshield/heatshield/routing-service/src/main/java/com/heatshield/routing/model/ShelterResult.java
