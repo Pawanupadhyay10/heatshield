@@ -12,4 +12,5 @@
 /workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/model/RiskEvent.java
 /workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/service/RedisCacheService.java
 /workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/config/RedisConfig.java
+/workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/config/CorsConfig.java
 /workspaces/heatshield/heatshield/heat-processing-service/src/main/java/com/heatshield/processing/entity/VulnerabilityZoneEntity.java

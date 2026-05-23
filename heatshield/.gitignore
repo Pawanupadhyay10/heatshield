@@ -1,2 +1,6 @@
+# Environment variables - do not push any .env files
 .env
+.env.example
+.env.*
+!.env.example  # Optionally track .env.example as a template
 

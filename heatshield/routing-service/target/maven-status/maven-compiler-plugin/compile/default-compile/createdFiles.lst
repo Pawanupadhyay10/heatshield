@@ -6,6 +6,7 @@ com/heatshield/routing/service/OsmDataLoader.class
 com/heatshield/routing/RoutingApplication.class
 com/heatshield/routing/entity/CoolShelterEntity$CoolShelterEntityBuilder.class
 com/heatshield/routing/service/RedisCacheService.class
+com/heatshield/routing/config/CorsConfig.class
 com/heatshield/routing/service/ShelterQueryService.class
 com/heatshield/routing/entity/CoolShelterEntity.class
 com/heatshield/routing/controller/RoutingController.class

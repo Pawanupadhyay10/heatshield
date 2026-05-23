@@ -1,6 +1,7 @@
 com/heatshield/agent/repository/AgentRunRepository.class
 com/heatshield/agent/model/RiskEvent$RiskEventBuilder.class
 com/heatshield/agent/model/AlertCommand$AlertCommandBuilder.class
+com/heatshield/agent/config/CorsConfig.class
 com/heatshield/agent/entity/AgentRunEntity$AgentRunEntityBuilder.class
 com/heatshield/agent/entity/AgentRunEntity.class
 com/heatshield/agent/service/FallbackAlertService.class

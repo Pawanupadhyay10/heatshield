@@ -1,6 +1,7 @@
 com/heatshield/notification/channel/SmsChannel.class
 com/heatshield/notification/repository/NotificationLogRepository.class
 com/heatshield/notification/controller/NotificationController.class
+com/heatshield/notification/config/CorsConfig.class
 com/heatshield/notification/NotificationApplication.class
 com/heatshield/notification/model/DeliveryResult$DeliveryResultBuilder.class
 com/heatshield/notification/model/AlertCommand$AlertCommandBuilder.class

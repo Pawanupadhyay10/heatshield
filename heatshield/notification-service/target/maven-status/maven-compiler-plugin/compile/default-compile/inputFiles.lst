@@ -10,5 +10,6 @@
 /workspaces/heatshield/heatshield/notification-service/src/main/java/com/heatshield/notification/NotificationApplication.java
 /workspaces/heatshield/heatshield/notification-service/src/main/java/com/heatshield/notification/channel/RedisAlertChannel.java
 /workspaces/heatshield/heatshield/notification-service/src/main/java/com/heatshield/notification/channel/NotificationChannel.java
+/workspaces/heatshield/heatshield/notification-service/src/main/java/com/heatshield/notification/config/CorsConfig.java
 /workspaces/heatshield/heatshield/notification-service/src/main/java/com/heatshield/notification/model/AlertCommand.java
 /workspaces/heatshield/heatshield/notification-service/src/main/java/com/heatshield/notification/channel/PushChannel.java

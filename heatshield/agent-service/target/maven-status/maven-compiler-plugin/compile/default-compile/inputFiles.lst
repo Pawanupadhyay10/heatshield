@@ -6,6 +6,7 @@
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/controller/AgentController.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/config/AgentConfig.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/service/FallbackAlertService.java
+/workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/config/CorsConfig.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/agent/HeatShieldAgent.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/agent/AgentAuditLogger.java
 /workspaces/heatshield/heatshield/agent-service/src/main/java/com/heatshield/agent/tools/HeatShieldTools.java
