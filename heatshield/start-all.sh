@@ -1,10 +1,26 @@
 #!/bin/bash
-export OWM_API_KEY=50edd8b5054ff77e2a05684cafc2fc66
-export GEMINI_API_KEY=your_gemini_key
+
+# Load environment variables from .env file
+if [ -f .env ]; then
+  set -a
+  source .env
+  set +a
+else
+  echo "❌ Error: .env file not found!"
+  echo "📋 Please copy .env.example to .env and fill in your API keys:"
+  echo "   cp .env.example .env"
+  exit 1
+fi
+
+# Validate required environment variables
+if [ -z "$OWM_API_KEY" ]; then
+  echo "❌ Error: OWM_API_KEY is not set in .env file"
+  exit 1
+fi
 
 cd /workspaces/heatshield/heatshield
 
-echo "Starting all services..."
+echo "✅ Starting all services..."
 
 # Kill existing
 for port in 8081 8082 8083 8084 8085; do
