@@ -1,0 +1,40 @@
+# Production Spring Boot config for Railway
+# All values come from Railway environment variables
+# Set these in Railway dashboard per service
+
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 30000
+
+  data:
+    redis:
+      url: ${REDIS_URL}
+      timeout: 2000ms
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER_URL}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: ${SPRING_APPLICATION_NAME}-group
+      auto-offset-reset: earliest
+
+# Logging — less verbose in prod
+logging:
+  level:
+    com.heatshield: INFO
+    org.springframework: WARN
+    dev.langchain4j: WARN
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

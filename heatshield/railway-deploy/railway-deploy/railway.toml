@@ -1,0 +1,6 @@
+# HeatShield Railway Deployment
+# Each service is deployed as a separate Railway service
+# pointing to its own subdirectory
+
+[build]
+builder = "NIXPACKS"
