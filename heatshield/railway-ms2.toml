@@ -1,9 +1,8 @@
-[build]
-builder = "NIXPACKS"
-buildCommand = "mvn clean package -pl heat-processing-service -am -DskipTests -q"
+[phases.setup]
+nixPkgs = ["jdk21_headless", "maven"]
 
-[deploy]
-startCommand = "java -Xmx512m -jar heat-processing-service/target/*.jar"
-healthcheckPath = "/actuator/health"
-healthcheckTimeout = 120
-restartPolicyType = "ON_FAILURE"
+[phases.build]
+cmds = ["mvn clean package -pl heat-processing-service -am -DskipTests -q"]
+
+[start]
+cmd = "java -Xmx512m -jar heat-processing-service/target/*.jar"
