@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 3
+  data:
+    redis:
+      url: ${REDIS_URL}
+      timeout: 2000ms
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER_URL:localhost:9092}
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    com.heatshield: INFO
+    org.springframework: WARN
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
