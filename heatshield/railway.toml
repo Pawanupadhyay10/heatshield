@@ -1,0 +1,8 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "mvn clean package -pl weather-ingestion-service -am -DskipTests -q"
+
+[deploy]
+startCommand = "java -Xmx512m -jar weather-ingestion-service/target/*.jar"
+healthcheckPath = "/actuator/health"
+healthcheckTimeout = 120

@@ -1,0 +1,9 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "mvn clean package -pl heat-processing-service -am -DskipTests -q"
+
+[deploy]
+startCommand = "java -Xmx512m -jar heat-processing-service/target/*.jar"
+healthcheckPath = "/actuator/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
