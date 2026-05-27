@@ -11,8 +11,6 @@ spring:
       url: ${SPRING_DATA_REDIS_URL:${REDIS_URL}}
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-    consumer:
-      auto-offset-reset: earliest
   jpa:
     hibernate:
       ddl-auto: none
@@ -38,3 +36,4 @@ logging:
     com.heatshield: INFO
     org.springframework: WARN
     org.apache.kafka: ERROR
+    org.hibernate: ERROR
