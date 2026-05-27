@@ -1,7 +1,9 @@
 FROM eclipse-temurin:21-jdk-alpine AS builder
 WORKDIR /workspace
+RUN apk add --no-cache maven
 COPY . .
 RUN mvn clean package -pl notification-service -am -DskipTests -q
+
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /workspace/notification-service/target/*.jar app.jar

@@ -1,6 +1,6 @@
 FROM eclipse-temurin:21-jdk-alpine AS builder
 WORKDIR /workspace
-# Copy entire repo for parent POM access
+RUN apk add --no-cache maven
 COPY . .
 RUN mvn clean package -pl weather-ingestion-service -am -DskipTests -q
 
