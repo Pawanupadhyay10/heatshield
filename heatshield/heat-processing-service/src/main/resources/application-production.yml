@@ -1,3 +1,6 @@
+server:
+  port: ${PORT:${SERVER_PORT:8080}}
+
 spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:${DATABASE_URL}}
@@ -11,8 +14,6 @@ spring:
       url: ${SPRING_DATA_REDIS_URL:${REDIS_URL}}
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-    consumer:
-      auto-offset-reset: earliest
   jpa:
     hibernate:
       ddl-auto: none
