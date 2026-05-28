@@ -1,22 +1,22 @@
 server:
-  port: ${PORT:${SERVER_PORT:8080}}
+  port: ${SERVER_PORT:8080}
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:${DATABASE_URL}}
-    username: ${SPRING_DATASOURCE_USERNAME:${PGUSER:postgres}}
-    password: ${SPRING_DATASOURCE_PASSWORD:${PGPASSWORD}}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 3
   data:
     redis:
-      url: ${SPRING_DATA_REDIS_URL:${REDIS_URL}}
+      url: ${SPRING_DATA_REDIS_URL:${REDIS_URL:redis://localhost:6379}}
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
