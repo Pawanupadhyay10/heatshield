@@ -1,8 +1,9 @@
-[phases.setup]
-nixPkgs = ["jdk21_headless", "maven"]
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "notification-service/Dockerfile"
 
-[phases.build]
-cmds = ["mvn clean package -pl notification-service -am -DskipTests -q"]
-
-[start]
-cmd = "java -Xmx512m -jar notification-service/target/*.jar"
+[deploy]
+startCommand = "java -Xmx512m -jar app.jar"
+healthcheckPath = "/actuator/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"

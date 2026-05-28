@@ -1,8 +1,10 @@
-[phases.setup]
-nixPkgs = ["jdk21_headless", "maven"]
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "routing-service/Dockerfile"
 
-[phases.build]
-cmds = ["mvn clean package -pl routing-service -am -DskipTests -q"]
-
-[start]
-cmd = "java -Xmx512m -jar routing-service/target/*.jar"
+[deploy]
+startCommand = "java -Xmx512m -jar app.jar"
+healthcheckPath = "/actuator/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

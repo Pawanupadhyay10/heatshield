@@ -1,8 +1,9 @@
-[phases.setup]
-nixPkgs = ["jdk21_headless", "maven"]
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "agent-service/Dockerfile"
 
-[phases.build]
-cmds = ["mvn clean package -pl agent-service -am -DskipTests -q"]
-
-[start]
-cmd = "java -Xmx512m -jar agent-service/target/*.jar"
+[deploy]
+startCommand = "java -Xmx512m -jar app.jar"
+healthcheckPath = "/actuator/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"

@@ -1,8 +1,9 @@
-[phases.setup]
-nixPkgs = ["jdk21_headless", "maven"]
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "weather-ingestion-service/Dockerfile"
 
-[phases.build]
-cmds = ["mvn clean package -pl weather-ingestion-service -am -DskipTests -q"]
-
-[start]
-cmd = "java -Xmx512m -jar weather-ingestion-service/target/*.jar"
+[deploy]
+startCommand = "java -Xmx512m -jar app.jar"
+healthcheckPath = "/actuator/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
