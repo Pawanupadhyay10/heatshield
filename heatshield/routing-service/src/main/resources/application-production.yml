@@ -44,3 +44,7 @@ logging:
 spring.kafka.properties.sasl.mechanism: PLAIN
 spring.kafka.properties.security.protocol: SASL_SSL
 spring.kafka.properties.sasl.jaas.config: ${SPRING_KAFKA_SASL_JAAS_CONFIG}
+
+spring.kafka.properties.sasl.mechanism: PLAIN
+spring.kafka.properties.security.protocol: SASL_SSL
+spring.kafka.properties.sasl.jaas.config: ${SPRING_KAFKA_PROPERTIES_SASL_JAAS_CONFIG}
