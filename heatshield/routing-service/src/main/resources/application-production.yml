@@ -39,3 +39,8 @@ logging:
     com.heatshield: INFO
     org.springframework: WARN
     org.apache.kafka: ERROR
+
+# Confluent Kafka SASL config
+spring.kafka.properties.sasl.mechanism: PLAIN
+spring.kafka.properties.security.protocol: SASL_SSL
+spring.kafka.properties.sasl.jaas.config: ${SPRING_KAFKA_SASL_JAAS_CONFIG}
