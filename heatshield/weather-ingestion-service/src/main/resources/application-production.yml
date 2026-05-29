@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${PORT:8081}
 
 spring:
   datasource:
@@ -13,7 +13,14 @@ spring:
     redis:
       url: ${SPRING_DATA_REDIS_URL:${REDIS_URL:redis://localhost:6379}}
   kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: ${SPRING_KAFKA_PROPERTIES_SASL_JAAS_CONFIG}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   jpa:
     hibernate:
       ddl-auto: update
@@ -38,13 +45,4 @@ logging:
   level:
     com.heatshield: INFO
     org.springframework: WARN
-    org.apache.kafka: ERROR
-
-# Confluent Kafka SASL config
-spring.kafka.properties.sasl.mechanism: PLAIN
-spring.kafka.properties.security.protocol: SASL_SSL
-spring.kafka.properties.sasl.jaas.config: ${SPRING_KAFKA_SASL_JAAS_CONFIG}
-
-spring.kafka.properties.sasl.mechanism: PLAIN
-spring.kafka.properties.security.protocol: SASL_SSL
-spring.kafka.properties.sasl.jaas.config: ${SPRING_KAFKA_PROPERTIES_SASL_JAAS_CONFIG}
+    org.apache.kafka: WARN
