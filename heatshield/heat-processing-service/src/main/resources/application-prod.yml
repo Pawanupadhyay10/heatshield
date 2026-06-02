@@ -1,6 +1,5 @@
 server:
   port: ${PORT:8082}
-
 spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL}
@@ -14,10 +13,9 @@ spring:
       url: ${SPRING_DATA_REDIS_URL:${REDIS_URL:redis://localhost:6379}}
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-    properties:
-      security.protocol: SASL_SSL
-      sasl.mechanism: PLAIN
-      sasl.jaas.config: ${SPRING_KAFKA_PROPERTIES_SASL_JAAS_CONFIG:dummy}
+    consumer:
+      group-id: heat-processing-group
+      auto-offset-reset: earliest
   jpa:
     hibernate:
       ddl-auto: update
@@ -26,9 +24,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   flyway:
     enabled: false
-
 spring.kafka.listener.missing-topics-fatal: false
-
 management:
   endpoints:
     web:
@@ -37,7 +33,6 @@ management:
   endpoint:
     health:
       show-details: always
-
 logging:
   level:
     com.heatshield: INFO
